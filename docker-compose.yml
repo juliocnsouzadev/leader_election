@@ -15,7 +15,15 @@ services:
       - 2380:2380
     networks:
       - app-tier
-  # myapp:
-    # image: 'YOUR_APPLICATION_IMAGE'
-    # networks:
-    #  - app-tier
+  app_01:
+    image: golang:1.16.6
+    networks:
+      - app-tier
+    depends_on:
+      - Etcd
+    environment:
+      - NODE_NAME=001
+    volumes:
+       - ./app:/app
+    working_dir: /app
+    command: bash -c "go get -d -v && go run ./main.go"
