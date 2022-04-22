@@ -27,3 +27,27 @@ services:
        - ./app:/app
     working_dir: /app
     command: bash -c "go get -d -v && go run ./main.go"
+  app_02:
+    image: golang:1.16.6
+    networks:
+      - app-tier
+    depends_on:
+      - Etcd
+    environment:
+      - NODE_NAME=002
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    command: bash -c "go get -d -v && go run ./main.go"
+  app_03:
+    image: golang:1.16.6
+    networks:
+      - app-tier
+    depends_on:
+      - Etcd
+    environment:
+      - NODE_NAME=003
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    command: bash -c "go get -d -v && go run ./main.go"
